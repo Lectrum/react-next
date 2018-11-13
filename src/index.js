@@ -1,2 +1,2 @@
 import './theme/init.css';
-import './examples/18';
+import './examples/1';
