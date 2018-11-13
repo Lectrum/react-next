@@ -1,0 +1,10 @@
+/* Core */
+@import '~sanitize.css';
+
+/* Instruments */
+@import './palette.css';
+@import './globals.css';
+
+/* Components */
+@import './components/stopwatch.css';
+@import './components/example.css';

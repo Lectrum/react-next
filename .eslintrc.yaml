@@ -1,0 +1,5 @@
+extends:
+    - '@lectrum/eslint-config-core'
+
+rules:
+    no-console: 0

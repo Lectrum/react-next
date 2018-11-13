@@ -1,0 +1,11 @@
+:root {
+    /* HEX */
+    --paletteColor1: #000000;
+    --paletteColor2: #ffffff;
+
+    /* RRGGBBAA */
+    --rgbaColor1: #00000050;
+
+    /* RGB */
+    --rgbColor1: rgb(153, 153, 153);
+}

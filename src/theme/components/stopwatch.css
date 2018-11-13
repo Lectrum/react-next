@@ -1,0 +1,55 @@
+.stopwatch {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #16161a;
+    user-select: none;
+}
+
+
+.stopwatch code {
+    color: wheat;
+    font-size: 34px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.stopwatch button {
+    color: wheat;
+    font-size: 26px;
+    font-weight: 600;
+    background-color: transparent;
+    border: 2px solid currentColor;
+    border-radius: 7px;
+    min-width: 100px;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.3s ease;
+}
+
+.stopwatch button:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.stopwatch button:hover {
+    color: cornflowerblue;
+}
+
+.stopwatch button:active {
+    color: orange;
+}
+
+.stopwatch span {
+    color: wheat;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.stopwatch .difference {
+    color: goldenrod;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 50px 0;
+}
