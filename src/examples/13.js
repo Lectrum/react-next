@@ -7,6 +7,11 @@ const stopwatchReducer = (currentState, newState) => {
 };
 
 const Stopwatch = () => {
+    /**
+     * Таким образом можно реализовать
+     * поведение, похожее на вызов
+     * this.setState в классовых компонентах.
+     */
     const [{ isRunning, lapse }, setState ] = useReducer(stopwatchReducer, {
         isRunning: false,
         lapse:     0,

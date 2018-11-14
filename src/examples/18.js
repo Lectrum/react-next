@@ -2,6 +2,7 @@
 import React, { lazy, memo, useState, Suspense } from 'react';
 import { render } from 'react-dom';
 
+// Code splitting
 const Tilt = lazy(() => import('./lazy/tilt'));
 
 export const Parent = memo(() => {

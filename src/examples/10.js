@@ -3,12 +3,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { render } from 'react-dom';
 
 const Parent = () => {
-    const [ name, setName ] = useState('🎅🏼 Санта Клаус');
+    const [ name, setName ] = useState('🎅🏼 Дед Мороз');
     const [ isEditing, setIsEditing ] = useState(false);
     const nameInputRef = useRef(null);
 
     const _setName = (event) => setName(event.target.value);
-    const _setIsEditing = () => setIsEditing(!isEditing);
+    const _toggleIsEditing = () => setIsEditing(!isEditing);
 
     useEffect(
         () => {
@@ -28,7 +28,7 @@ const Parent = () => {
                 value = { name }
                 onChange = { _setName }
             />
-            <button onClick = { _setIsEditing }>{buttonText}</button>
+            <button onClick = { _toggleIsEditing }>{buttonText}</button>
         </section>
     );
 };

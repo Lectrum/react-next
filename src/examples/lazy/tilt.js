@@ -4,6 +4,6 @@ import Tilt from 'react-vanilla-tilt';
 
 export default () => (
     <Tilt className = 'tilt'>
-        <div>Я был загружен динамически!</div>
+        <div>Меня загрузили динамически.</div>
     </Tilt>
 );

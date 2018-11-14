@@ -3,7 +3,7 @@ import React, { useState, useMemo } from 'react';
 import { render } from 'react-dom';
 
 const getMultiplier = (a, b) => {
-    console.log('→ Вычисление.');
+    console.log('✅ вычисляется только когда меняется один из аргументов');
 
     return a ** b;
 };
@@ -14,8 +14,8 @@ const Parent = ({ firstValue, secondValue }) => {
         () => getMultiplier(firstValue, secondValue),
         /**
          * Функция-вычислитель ↑ выполнится снова
-         * только в том, случае, если хотя-бы одно
-         * из этих ↓ значений изменится.
+         * только в том, случае, если изменится
+         * хотя-бы одно из этих ↓ значений.
          */
         [ firstValue, secondValue ],
     );

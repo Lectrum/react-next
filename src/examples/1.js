@@ -9,7 +9,7 @@ class Parent extends Component {
 
     _increment = () => this.setState(({ count }) => ({ count: count + 1 }));
     _reset = () => this.setState({ count: 0 });
-    _decrement = () => this.setState(({ count }) => ({ count: count + 1 }));
+    _decrement = () => this.setState(({ count }) => ({ count: count - 1 }));
 
     render() {
         const { count } = this.state;

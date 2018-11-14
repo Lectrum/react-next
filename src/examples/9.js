@@ -6,15 +6,26 @@ const Parent = () => {
     const [ count, setCount ] = useState(0);
 
     const _increment = () => setCount(count + 1);
+    // const _increment = () => {
+    //     setCount((prevCount) => {
+    //         // console.log('⌚️ setCount, count', count);
+    //         // console.log('⌚️ setCount, prevCount', prevCount);
+
+    //         return prevCount + 1;
+    //     });
+    // };
     const _reset = () => setCount(0);
     const _decrement = () => setCount(count - 1);
 
     useEffect(() => {
-        const timer = setTimeout(_increment, 1000);
+        const timer = setInterval(_increment, 1000);
 
-        console.log('→ render');
+        console.log('⏳ useEffect');
 
-        return () => clearTimeout(timer);
+        return () => {
+            console.log('⌛️ clearing');
+            clearInterval(timer);
+        };
         /**
          * Если вторым аргументом useEffect передать пустой массив,
          * то useEffect сработает как componentDidMount + componentWillUnmount.
@@ -23,6 +34,8 @@ const Parent = () => {
          * А при удалении компонента из DOM выполнится clearTimeout.
          */
     }, []);
+
+    // console.log('🖥 render, count', count);
 
     return (
         <section className = 'example'>
