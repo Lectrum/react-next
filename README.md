@@ -1,44 +1,110 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">
+    <a href="https://lectrum.io" target="_blank" rel="noopener noreferrer">
+        <img src="./static/favicon/favicon-woodsmoke.svg" alt="Lectrum favicon" width="25" />
+    </a>
+    Вебинар на тему будущего React 🚀
+</h1>
+<br>
 
-## Available Scripts
+<div align="center">
+    <!-- Package version -->
+    <img src="https://img.shields.io/github/package-json/v/lectrum/react-next.svg?longCache=true&style=flat-square"
+        alt="Package version" />
+    <!-- Last commit -->
+    <img src="https://img.shields.io/github/last-commit/lectrum/react-next.svg?longCache=true&style=flat-square" alt="Last commit"
+    />
+    <!-- Dependencies -->
+    <img src="https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg?longCache=true&style=flat-square" alt="Dependencies"
+    />
+    <!-- Contributors welcome -->
+    <img src="https://img.shields.io/badge/contributions-welcome-orange.svg?longCache=true&style=flat-square" alt="Last update"
+    />
+</div>
+<div align="center">
+    <!-- Наш Facebook -->
+    <a href="https://www.facebook.com/lectrum">
+        <img src="https://img.shields.io/badge/%D0%9F%D0%BE%D0%B4%D0%BF%D0%B8%D1%81%D1%8B%D0%B2%D0%B0%D0%B9%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%BD%D0%B0%D1%88-Facebook-blue.svg?longCache=true&style=for-the-badge&link=https://www.facebook.com/lectrum"
+            alt="Подписывайся на наш Facebook" />
+    </a>
+</div>
+<br>
 
-In the project directory, you can run:
+<h3 align="center">
+    👋🏼 Привет и добро пожаловать!
+</h3>
+<p>
+     🔭 Вместе мы разберём новые фичи React, и обсудим будущее, которое сулит нам асинхронный рендеринг! Так что пристегни ремни — будет интересно!
+</p>
+<br>
+<p>
+    👨🏼‍🔬 В этой инструкции ты узнаешь как настроить и запустить проект.
+</p>
+<br>
 
-### `npm start`
+## 📜 Содержание
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+-   [🚀 Инструкция по запуску проекта](#-инструкция-по-запуску-проекта)
+-   [🤔 FAQ](#-faq)
+<br>
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### 🚀 Инструкция по запуску проекта
 
-### `npm test`
+1. [Скачай и установи](https://nodejs.org/en/) последнюю **`LTS`**-версию Node.js;
+2. Выполни в консоли **`node -v`** и убедись, что установленная версия Node.js не ниже **`v10.13.0`**;
+3. Выполни в консоли **`npm -v`** и убедись, что установленная версия npm не ниже **`6.4.1`**;
+4. [Скачай и установи Git](https://git-scm.com/downloads), если его нет на компьютере;
+5. Выполни в консоли **`git --version`**, чтобы проверь версию установленного Git, должно быть не ниже **`2.19.0`**;
+6. Склонируй этот проект:
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git clone https://github.com/Lectrum/react-next.git
+```
 
-### `npm run build`
+7. Перейди в проект, выполнив команду:
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+cd react-next
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+8. Теперь выполни команду:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm install
+```
 
-### `npm run eject`
+или
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+yarn
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+9. После чего проект станет доступен для запуска:
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+npm run start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+или
 
-## Learn More
+```bash
+yarn start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+10. Если всё сделано правильно, то в браузере откроется страница со счётчиком.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br>
+
+### 🤔 FAQ
+
+Ответы на часто задаваемые вопросы можно найти [здесь](https://github.com/Lectrum/FAQ#-faq).
+<br>
+
+### Лицензия
+
+MIT © [Lectrum](https://lectrum.io)
+
+<div align="center">
+  <!-- Сделано с любовь -->
+    <img src="https://img.shields.io/badge/%D0%A1%D0%B4%D0%B5%D0%BB%D0%B0%D0%BD%D0%BE%20%D1%81-%F0%9F%96%A4-red.svg?longCache=true&style=for-the-badge&colorA=000&colorB=fedcba"
+      alt="Сделано с любовь" />
+</div>
