@@ -1,44 +1,63 @@
 // Core
-import React, { useState, useRef, useEffect } from 'react';
+import React, {
+    forwardRef,
+    useRef,
+    useImperativeMethods,
+    useState,
+    useEffect,
+} from 'react';
 import { render } from 'react-dom';
 
-const Stopwatch = () => {
-    const [ lapse, setLapse ] = useState(0);
-    const [ isRunning, setRunning ] = useState(false);
-    const intervalRef = useRef(null);
+const Child = forwardRef((props, ref) => {
+    const nameInputRef = useRef(null);
 
-    const _toggleRun = () => {
-        if (isRunning) {
-            clearInterval(intervalRef.current);
-        } else {
-            const startTime = Date.now() - lapse;
-            intervalRef.current = setInterval(() => {
-                setLapse(Date.now() - startTime);
-            }, 0);
-        }
-
-        setRunning(!isRunning);
-    };
-
-    const _clear = () => {
-        clearInterval(intervalRef.current);
-        setLapse(0);
-        setRunning(false);
-    };
-
-    useEffect(() => {
-        return () => clearInterval(intervalRef.current);
-    }, []);
-
-    const buttonText = isRunning ? '🏁 Стоп' : '🎬 Старт';
+    useImperativeMethods(ref, () => {
+        return {
+            imperativeFocus: () => {
+                nameInputRef.current.focus();
+            },
+        };
+    });
 
     return (
-        <div className = 'stopwatch'>
-            <code>{lapse} мс</code>
-            <button onClick = { _toggleRun }>{buttonText}</button>
-            <button onClick = { _clear }>Очистить</button>
-        </div>
+        <input
+            disabled = { !props.isEditing }
+            ref = { nameInputRef }
+            value = { props.name }
+            onChange = { props._setName }
+        />
+    );
+});
+
+const Parent = () => {
+    const [ name, setName ] = useState('🎅🏼 Дед Мороз');
+    const [ isEditing, setIsEditing ] = useState(false);
+    const childRef = useRef(null);
+
+    const _setName = (event) => setName(event.target.value);
+    const _toggleIsEditing = () => setIsEditing(!isEditing);
+
+    useEffect(
+        () => {
+            childRef.current.imperativeFocus();
+        },
+        [ isEditing ],
+    );
+
+    const buttonText = isEditing ? 'Заблокировать' : 'Разблокировать';
+
+    return (
+        <section className = 'example'>
+            <h1>{name}</h1>
+            <Child
+                _setName = { _setName }
+                isEditing = { isEditing }
+                name = { name }
+                ref = { childRef }
+            />
+            <button onClick = { _toggleIsEditing }>{buttonText}</button>
+        </section>
     );
 };
 
-render(<Stopwatch />, document.getElementById('app'));
+render(<Parent />, document.getElementById('app'));

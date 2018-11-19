@@ -1,45 +1,36 @@
 // Core
-import React, { memo, useState } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 
 // Hooks
-import { useStopWatch, useRandomColor } from './hooks';
+import { useStopWatch } from './hooks';
 
-/**
- * memo — аналог метода жизненного цикла shouldComponentUpdate,
- * только для функциональных компонентов.
- */
-const Title = memo((props) => {
-    const color = useRandomColor();
+const Stopwatch = () => {
+    /**
+     * Вынесение логики в кастомные хуки позволяет элегантным путём решить проблему,
+     * которую пытались решить паттерны Higher Order Component и Render Props.
+     */
+    const watch1 = useStopWatch();
+    const watch2 = useStopWatch();
 
-    return <h1 style = {{ color }}>Счётчик: {props.count}</h1>;
-});
-
-const Parent = memo(() => {
-    const [ count, setCount ] = useState(0);
-    const { lapse, clear, isRunning, toggleRun } = useStopWatch();
-
-    const _increment = () => setCount((prevCount) => prevCount + 1);
-    const _reset = () => setCount(0);
-    const _decrement = () => setCount((prevCount) => prevCount - 1);
-
-    const buttonText = isRunning ? '🏁 Стоп' : '🎬 Старт';
+    const buttonText1 = watch1.isRunning ? '🏁 Стоп' : '🎬 Старт';
+    const buttonText2 = watch2.isRunning ? '🏁 Стоп' : '🎬 Старт';
 
     return (
-        <section className = 'example'>
-            <Title count = { count } />
-            <div>
-                <button onClick = { _increment }>+</button>
-                <button onClick = { _reset }>Обнулить</button>
-                <button onClick = { _decrement }>-</button>
-            </div>
-            <section className = 'stopwatch'>
-                <code>{lapse} мс</code>
-                <button onClick = { toggleRun }>{buttonText}</button>
-                <button onClick = { clear }>Очистить</button>
-            </section>
-        </section>
+        <div className = 'stopwatch'>
+            <code>{watch1.lapse} мс</code>
+            <button onClick = { watch1.toggleRun }>{buttonText1}</button>
+            <button onClick = { watch1.clear }>Очистить</button>
+            <hr />
+            <code className = 'difference'>
+                Разница: {watch1.lapse - watch2.lapse} мс
+            </code>
+            <hr />
+            <code>{watch2.lapse} мс</code>
+            <button onClick = { watch2.toggleRun }>{buttonText2}</button>
+            <button onClick = { watch2.clear }>Очистить</button>
+        </div>
     );
-});
+};
 
-render(<Parent />, document.getElementById('app'));
+render(<Stopwatch />, document.getElementById('app'));

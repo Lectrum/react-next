@@ -1,49 +1,45 @@
 // Core
-import React, { useState, useMemo } from 'react';
+import React, { memo, useState } from 'react';
 import { render } from 'react-dom';
 
-const getMultiplier = (a, b) => {
-    console.log('✅ вычисляется только когда меняется один из аргументов');
+// Hooks
+import { useStopWatch, useRandomColor } from './hooks';
 
-    return a ** b;
-};
+/**
+ * memo — аналог метода жизненного цикла shouldComponentUpdate,
+ * только для функциональных компонентов.
+ */
+const Title = memo((props) => {
+    const color = useRandomColor();
 
-const Parent = ({ firstValue, secondValue }) => {
+    return <h1 style = {{ color }}>Счётчик: {props.count}</h1>;
+});
+
+const Parent = memo(() => {
     const [ count, setCount ] = useState(0);
-    const memoizedMultiplier = useMemo(
-        () => getMultiplier(firstValue, secondValue),
-        /**
-         * Функция-вычислитель ↑ выполнится снова
-         * только в том, случае, если изменится
-         * хотя-бы одно из этих ↓ значений.
-         */
-        [ firstValue, secondValue ],
-    );
+    const { lapse, clear, isRunning, toggleRun } = useStopWatch();
 
-    const _increment = () => setCount(count + 1);
+    const _increment = () => setCount((prevCount) => prevCount + 1);
     const _reset = () => setCount(0);
-    const _decrement = () => setCount(count - 1);
+    const _decrement = () => setCount((prevCount) => prevCount - 1);
+
+    const buttonText = isRunning ? '🏁 Стоп' : '🎬 Старт';
 
     return (
         <section className = 'example'>
-            <h1>
-                Счётчик, умноженный на {memoizedMultiplier}
-                :&nbsp;
-                {count * memoizedMultiplier}
-            </h1>
+            <Title count = { count } />
             <div>
                 <button onClick = { _increment }>+</button>
                 <button onClick = { _reset }>Обнулить</button>
                 <button onClick = { _decrement }>-</button>
             </div>
+            <section className = 'stopwatch'>
+                <code>{lapse} мс</code>
+                <button onClick = { toggleRun }>{buttonText}</button>
+                <button onClick = { clear }>Очистить</button>
+            </section>
         </section>
     );
-};
+});
 
-render(
-    <Parent
-        firstValue = { 3 }
-        secondValue = { 7 }
-    />,
-    document.getElementById('app'),
-);
+render(<Parent />, document.getElementById('app'));

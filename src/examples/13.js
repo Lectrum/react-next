@@ -2,39 +2,76 @@
 import React, { useReducer, useRef, useEffect } from 'react';
 import { render } from 'react-dom';
 
-const stopwatchReducer = (currentState, newState) => {
-    return { ...currentState, ...newState };
+const stopwatchReducer = (state, action) => {
+    switch (action.type) {
+        case 'SET_LAPSE':
+            return {
+                ...state,
+                lapse: action.payload.currentTime - action.payload.startTime,
+            };
+        case 'START_RUNNING':
+            return {
+                ...state,
+                isRunning: true,
+            };
+        case 'STOP_RUNNING':
+            return {
+                ...state,
+                isRunning: false,
+            };
+        case 'RESET':
+            return {
+                ...state,
+                lapse:     0,
+                isRunning: false,
+            };
+        default:
+            return state;
+    }
 };
 
 const Stopwatch = () => {
     /**
-     * Таким образом можно реализовать
-     * поведение, похожее на вызов
-     * this.setState в классовых компонентах.
+     * Механизм работы useReducer идентичен по отношению к Redux.
+     * Если ты раньше юзал Redux, то useReducer для тебя как аквариум
+     * для рыбки. Или мягкий коврик для котика. :)
+     * 🐈
      */
-    const [{ isRunning, lapse }, setState ] = useReducer(stopwatchReducer, {
-        isRunning: false,
-        lapse:     0,
-    });
+    const [{ isRunning, lapse }, dispatch ] = useReducer(
+        // 1-й аргумент — редьюсер.
+        stopwatchReducer,
+        // 2-й аргумент — изначальное состояние.
+        {
+            isRunning: false,
+            lapse:     0,
+        },
+        // 3-й опциональный аргумент — экшен, который нужно запустить во время первого рендера.
+        {
+            type:    'SET_LAPSE',
+            payload: { currentTime: 100, startTime: 50 },
+        },
+    );
     const intervalRef = useRef(null);
 
     const _toggleRun = () => {
         if (isRunning) {
             clearInterval(intervalRef.current);
+            dispatch({ type: 'STOP_RUNNING' });
         } else {
             const startTime = Date.now() - lapse;
             intervalRef.current = setInterval(() => {
-                setState({
-                    lapse: Date.now() - startTime,
+                dispatch({
+                    type:    'SET_LAPSE',
+                    payload: { currentTime: Date.now(), startTime },
                 });
             }, 0);
+            dispatch({ type: 'START_RUNNING' });
         }
-        setState({ isRunning: !isRunning });
     };
 
     const _clear = () => {
         clearInterval(intervalRef.current);
-        setState({ lapse: 0, isRunning: false });
+        dispatch({ type: 'RESET' });
     };
 
     useEffect(() => {
