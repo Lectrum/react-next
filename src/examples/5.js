@@ -6,7 +6,7 @@ const getInitialState = (baseValue, multiplier) => baseValue ** multiplier;
 
 const Parent = (props) => {
     /**
-     * Если useState в аргумента предать функцию
+     * Если useState в аргумент предать функцию
      * для вычисления изначального состояния,
      * то она выполнится только при первом рендере.
      */
@@ -22,17 +22,17 @@ const Parent = (props) => {
      * вычисление для получения изначального состояния.
      */
 
-    const _increment = () => setCount((prevCount) => prevCount + 1);
-    const _reset = () => setCount(0);
     const _decrement = () => setCount((prevCount) => prevCount - 1);
+    const _reset = () => setCount(0);
+    const _increment = () => setCount((prevCount) => prevCount + 1);
 
     return (
         <section className = 'example'>
             <h1>Счётчик: {count}</h1>
             <div>
-                <button onClick = { _increment }>+</button>
-                <button onClick = { _reset }>Обнулить</button>
                 <button onClick = { _decrement }>-</button>
+                <button onClick = { _reset }>Обнулить</button>
+                <button onClick = { _increment }>+</button>
             </div>
         </section>
     );
@@ -40,8 +40,8 @@ const Parent = (props) => {
 
 render(
     <Parent
-        baseValue = { 6 }
-        multiplier = { 11 }
+        baseValue = { 3 }
+        multiplier = { 4 }
     />,
     document.getElementById('app'),
 );

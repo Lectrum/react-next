@@ -20,9 +20,9 @@ const Parent = ({ firstValue, secondValue }) => {
         [ firstValue, secondValue ],
     );
 
-    const _increment = () => setCount(count + 1);
+    const _decrement = () => setCount((prevCount) => prevCount - 1);
     const _reset = () => setCount(0);
-    const _decrement = () => setCount(count - 1);
+    const _increment = () => setCount((prevCount) => prevCount + 1);
 
     return (
         <section className = 'example'>
@@ -32,9 +32,9 @@ const Parent = ({ firstValue, secondValue }) => {
                 {count * memoizedMultiplier}
             </h1>
             <div>
-                <button onClick = { _increment }>+</button>
-                <button onClick = { _reset }>Обнулить</button>
                 <button onClick = { _decrement }>-</button>
+                <button onClick = { _reset }>Обнулить</button>
+                <button onClick = { _increment }>+</button>
             </div>
         </section>
     );
@@ -43,7 +43,7 @@ const Parent = ({ firstValue, secondValue }) => {
 render(
     <Parent
         firstValue = { 3 }
-        secondValue = { 7 }
+        secondValue = { 4 }
     />,
     document.getElementById('app'),
 );

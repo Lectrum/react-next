@@ -34,7 +34,7 @@ const Stopwatch = () => {
     /**
      * Механизм работы useReducer идентичен по отношению к Redux.
      * Если ты раньше юзал Redux, то useReducer для тебя как аквариум
-     * для рыбки. Или мягкий коврик для котика. :)
+     * для рыбки. Или мягкий коврик для котика.
      * 🐈
      */
     const [{ isRunning, lapse }, dispatch ] = useReducer(
@@ -74,9 +74,7 @@ const Stopwatch = () => {
         dispatch({ type: 'RESET' });
     };
 
-    useEffect(() => {
-        return () => clearInterval(intervalRef.current);
-    }, []);
+    useEffect(() => () => clearInterval(intervalRef.current), []);
 
     const buttonText = isRunning ? '🏁 Стоп' : '🎬 Старт';
 

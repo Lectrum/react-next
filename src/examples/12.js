@@ -26,9 +26,7 @@ const Stopwatch = () => {
         setRunning(false);
     };
 
-    useEffect(() => {
-        return () => clearInterval(intervalRef.current);
-    }, []);
+    useEffect(() => () => clearInterval(intervalRef.current), []);
 
     const buttonText = isRunning ? '🏁 Стоп' : '🎬 Старт';
 

@@ -3,15 +3,16 @@ import React, { useReducer, useRef, useEffect } from 'react';
 import { render } from 'react-dom';
 
 const stopwatchReducer = (currentState, newState) => {
-    return { ...currentState, ...newState };
-};
-
-const Stopwatch = () => {
     /**
      * Таким образом можно реализовать
      * поведение, похожее на вызов
      * this.setState в классовых компонентах.
      */
+    return { ...currentState, ...newState };
+};
+
+const Stopwatch = () => {
+    /**                          ↓ почти как this.setState */
     const [{ isRunning, lapse }, setState ] = useReducer(stopwatchReducer, {
         isRunning: false,
         lapse:     0,
@@ -37,9 +38,7 @@ const Stopwatch = () => {
         setState({ lapse: 0, isRunning: false });
     };
 
-    useEffect(() => {
-        return () => clearInterval(intervalRef.current);
-    }, []);
+    useEffect(() => () => clearInterval(intervalRef.current), []);
 
     const buttonText = isRunning ? '🏁 Стоп' : '🎬 Старт';
 

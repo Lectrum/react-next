@@ -57,9 +57,7 @@ export const useStopWatch = () => {
         dispatch({ type: 'RESET' });
     };
 
-    useEffect(() => {
-        return () => clearInterval(intervalRef.current);
-    }, []);
+    useEffect(() => () => clearInterval(intervalRef.current), []);
 
     return { isRunning, lapse, toggleRun, clear };
 };

@@ -1,11 +1,11 @@
 // Core
-import React, { lazy, memo, useState, Suspense } from 'react';
+import React, { lazy, useState, Suspense } from 'react';
 import { render } from 'react-dom';
 
 // Code splitting
 const Tilt = lazy(() => import('./lazy/tilt'));
 
-export const Parent = memo(() => {
+export const Parent = () => {
     const [ isTiltShown, setIsTiltShown ] = useState(false);
 
     const buttonText = isTiltShown ? 'Спрятать плашку' : 'Показать плашку';
@@ -20,6 +20,6 @@ export const Parent = memo(() => {
             </Suspense>
         </section>
     );
-});
+};
 
 render(<Parent />, document.getElementById('app'));

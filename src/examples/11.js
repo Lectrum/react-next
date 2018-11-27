@@ -13,7 +13,7 @@ const Child = forwardRef((props, ref) => {
 
     useImperativeMethods(ref, () => {
         return {
-            imperativeFocus: () => {
+            focusImperatively: () => {
                 nameInputRef.current.focus();
             },
         };
@@ -39,7 +39,7 @@ const Parent = () => {
 
     useEffect(
         () => {
-            childRef.current.imperativeFocus();
+            childRef.current.focusImperatively();
         },
         [ isEditing ],
     );

@@ -3,7 +3,7 @@ import React, { memo, useState, useCallback } from 'react';
 import { render } from 'react-dom';
 
 const Button = memo((props) => {
-    console.log('→ render', props);
+    console.log('→ 🖥 Рендер потомка', props);
 
     return <button onClick = { props.handleClick }>{props.children}</button>;
 });
@@ -11,9 +11,11 @@ const Button = memo((props) => {
 const Parent = () => {
     const [ count, setCount ] = useState(0);
 
-    const _increment = useCallback(() => setCount(count + 1));
+    const _decrement = useCallback(() => setCount((prevCount) => prevCount - 1));
     const _reset = useCallback(() => setCount(0));
-    const _decrement = useCallback(() => setCount(count - 1));
+    const _increment = useCallback(() => setCount((prevCount) => prevCount + 1));
+
+    console.log('→ 🖥 Рендер родителя');
 
     return (
         <section className = 'example'>
@@ -22,9 +24,9 @@ const Parent = () => {
                 {count}
             </h1>
             <div>
-                <Button handleClick = { _increment }>-</Button>
-                <Button handleClick = { _reset }>reset</Button>
-                <Button handleClick = { _decrement }>+</Button>
+                <Button handleClick = { _decrement }>-</Button>
+                <Button handleClick = { _reset }>Обнулить</Button>
+                <Button handleClick = { _increment }>+</Button>
             </div>
         </section>
     );

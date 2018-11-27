@@ -6,18 +6,16 @@ import { render } from 'react-dom';
 import { useCounter } from './hooks';
 
 const Parent = () => {
-    /**
-     * Выносим сложную логику в абстракцию — кастомный хук.
-     */
-    const { count, _increment, _decrement, _reset } = useCounter(5, 2);
+    /** Выносим сложную логику в абстракцию — кастомный хук. */
+    const { count, _decrement, _reset, _increment } = useCounter(5, 2);
 
     return (
         <section className = 'example'>
             <h1>Счётчик: {count}</h1>
             <div>
-                <button onClick = { _increment }>+</button>
-                <button onClick = { _reset }>Обнулить</button>
                 <button onClick = { _decrement }>-</button>
+                <button onClick = { _reset }>Обнулить</button>
+                <button onClick = { _increment }>+</button>
             </div>
         </section>
     );

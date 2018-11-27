@@ -15,13 +15,13 @@ const Title = memo((props) => {
     return <h1 style = {{ color }}>Счётчик: {props.count}</h1>;
 });
 
-const Parent = memo(() => {
+const Parent = () => {
     const [ count, setCount ] = useState(0);
     const { lapse, clear, isRunning, toggleRun } = useStopWatch();
 
-    const _increment = () => setCount((prevCount) => prevCount + 1);
-    const _reset = () => setCount(0);
     const _decrement = () => setCount((prevCount) => prevCount - 1);
+    const _reset = () => setCount(0);
+    const _increment = () => setCount((prevCount) => prevCount + 1);
 
     const buttonText = isRunning ? '🏁 Стоп' : '🎬 Старт';
 
@@ -29,9 +29,9 @@ const Parent = memo(() => {
         <section className = 'example'>
             <Title count = { count } />
             <div>
-                <button onClick = { _increment }>+</button>
-                <button onClick = { _reset }>Обнулить</button>
                 <button onClick = { _decrement }>-</button>
+                <button onClick = { _reset }>Обнулить</button>
+                <button onClick = { _increment }>+</button>
             </div>
             <section className = 'stopwatch'>
                 <code>{lapse} мс</code>
@@ -40,6 +40,6 @@ const Parent = memo(() => {
             </section>
         </section>
     );
-});
+};
 
 render(<Parent />, document.getElementById('app'));
