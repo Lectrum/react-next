@@ -1,5 +1,5 @@
 // Core
-import React, { memo, useState, useCallback } from 'react';
+import React, { memo, useState, useCallback, useMemo } from 'react';
 import { render } from 'react-dom';
 
 const Button = memo((props) => {
@@ -13,7 +13,8 @@ const Parent = () => {
 
     const _decrement = useCallback(() => setCount((prevCount) => prevCount - 1));
     const _reset = useCallback(() => setCount(0));
-    const _increment = useCallback(() => setCount((prevCount) => prevCount + 1));
+    /* Хук useCallback(fn, inputs) эквивалентен хуку useMemo(() => fn, inputs) */
+    const _increment = useMemo(() => () => setCount((prevCount) => prevCount + 1));
 
     console.log('→ 🖥 Рендер родителя');
 
