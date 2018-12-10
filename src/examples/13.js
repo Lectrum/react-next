@@ -79,11 +79,11 @@ const Stopwatch = () => {
     const buttonText = isRunning ? '🏁 Стоп' : '🎬 Старт';
 
     return (
-        <div className = 'stopwatch'>
+        <section className = 'stopwatch'>
             <code>{lapse} мс</code>
             <button onClick = { _toggleRun }>{buttonText}</button>
             <button onClick = { _clear }>Очистить</button>
-        </div>
+        </section>
     );
 };
 

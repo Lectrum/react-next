@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { render } from 'react-dom';
 
-const Parent = () => {
+const Counter = () => {
     const [ name, setName ] = useState('🎅🏼 Дед Мороз');
     const [ isEditing, setIsEditing ] = useState(false);
     const nameInputRef = useRef(null);
@@ -20,7 +20,7 @@ const Parent = () => {
     const buttonText = isEditing ? 'Заблокировать' : 'Разблокировать';
 
     return (
-        <section className = 'example'>
+        <section className = 'counter'>
             <h1>{name}</h1>
             <input
                 disabled = { !isEditing }
@@ -33,4 +33,4 @@ const Parent = () => {
     );
 };
 
-render(<Parent />, document.getElementById('app'));
+render(<Counter />, document.getElementById('app'));

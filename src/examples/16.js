@@ -21,11 +21,11 @@ const Stopwatch = () => {
             <code>{watch1.lapse} мс</code>
             <button onClick = { watch1.toggleRun }>{buttonText1}</button>
             <button onClick = { watch1.clear }>Очистить</button>
-            <hr />
+            <b />
             <code className = 'difference'>
                 Разница: {watch1.lapse - watch2.lapse} мс
             </code>
-            <hr />
+            <b />
             <code>{watch2.lapse} мс</code>
             <button onClick = { watch2.toggleRun }>{buttonText2}</button>
             <button onClick = { watch2.clear }>Очистить</button>

@@ -8,29 +8,24 @@ const Button = memo((props) => {
     return <button onClick = { props.handleClick }>{props.children}</button>;
 });
 
-const Parent = () => {
+const Counter = () => {
     const [ count, setCount ] = useState(0);
 
+    /* Хук useCallback(fn, inputs) эквивалентен хуку useMemo(() => fn, inputs) */
     const _decrement = useCallback(() => setCount((prevCount) => prevCount - 1));
     const _reset = useCallback(() => setCount(0));
-    /* Хук useCallback(fn, inputs) эквивалентен хуку useMemo(() => fn, inputs) */
     const _increment = useMemo(() => () => setCount((prevCount) => prevCount + 1));
 
     console.log('→ 🖥 Рендер родителя');
 
     return (
-        <section className = 'example'>
-            <h1>
-                Счётчик:&nbsp;
-                {count}
-            </h1>
-            <div>
-                <Button handleClick = { _decrement }>-</Button>
-                <Button handleClick = { _reset }>Обнулить</Button>
-                <Button handleClick = { _increment }>+</Button>
-            </div>
+        <section className = 'counter'>
+            <h1>Счётчик: {count}</h1>
+            <Button handleClick = { _decrement }>-</Button>
+            <Button handleClick = { _reset }>Обнулить</Button>
+            <Button handleClick = { _increment }>+</Button>
         </section>
     );
 };
 
-render(<Parent />, document.getElementById('app'));
+render(<Counter />, document.getElementById('app'));

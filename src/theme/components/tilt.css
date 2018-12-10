@@ -1,0 +1,32 @@
+.tilt {
+    grid-area: example-1;
+    display: grid;
+    grid-template-columns: 1fr minmax(350px, 1fr) 1fr;
+    grid-template-rows: auto minmax(170px, 1fr);
+    justify-items: center;
+    justify-content: center;
+    color: wheat;
+    user-select: none;
+}
+
+.tilt button {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.tilt .dynamic {
+    grid-column: 2;
+    grid-row: 2;
+    background-image: linear-gradient(
+        135deg,
+        #FF00BA 0%,
+        #FAE713 100%
+    ) !important;
+    cursor: pointer;
+}
+
+.tilt .dynamic div {
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+}

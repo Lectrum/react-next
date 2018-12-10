@@ -1,0 +1,24 @@
+button {
+    color: wheat;
+    border: 2px solid currentColor;
+    border-radius: 7px;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.3s ease;
+    font-size: 21px;
+    padding: 7px 20px;
+}
+
+button:hover {
+    color: #6495ED;
+}
+
+button:active {
+    color: orange;
+}
+
+button:disabled {
+    color: gray;
+    cursor: wait;
+}

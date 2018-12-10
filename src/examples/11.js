@@ -47,7 +47,7 @@ const Parent = () => {
     const buttonText = isEditing ? 'Заблокировать' : 'Разблокировать';
 
     return (
-        <section className = 'example'>
+        <section className = 'counter'>
             <h1>{name}</h1>
             <Child
                 _setName = { _setName }

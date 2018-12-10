@@ -8,7 +8,7 @@ const getMultiplier = (a, b) => {
     return a ** b;
 };
 
-const Parent = ({ firstValue, secondValue }) => {
+const Counter = ({ firstValue, secondValue }) => {
     const [ count, setCount ] = useState(0);
     const memoizedMultiplier = useMemo(
         () => getMultiplier(firstValue, secondValue),
@@ -25,23 +25,20 @@ const Parent = ({ firstValue, secondValue }) => {
     const _increment = () => setCount((prevCount) => prevCount + 1);
 
     return (
-        <section className = 'example'>
+        <section className = 'counter'>
             <h1>
-                Счётчик, умноженный на {memoizedMultiplier}
-                :&nbsp;
-                {count * memoizedMultiplier}
+                <span>Счётчик, умноженный на {memoizedMultiplier}:</span>
+                <span>{count * memoizedMultiplier}</span>
             </h1>
-            <div>
-                <button onClick = { _decrement }>-</button>
-                <button onClick = { _reset }>Обнулить</button>
-                <button onClick = { _increment }>+</button>
-            </div>
+            <button onClick = { _decrement }>-</button>
+            <button onClick = { _reset }>Обнулить</button>
+            <button onClick = { _increment }>+</button>
         </section>
     );
 };
 
 render(
-    <Parent
+    <Counter
         firstValue = { 3 }
         secondValue = { 4 }
     />,

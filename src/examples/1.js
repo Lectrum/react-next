@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-class Parent extends Component {
+class Counter extends Component {
     state = {
         count: 0,
     };
@@ -15,16 +15,14 @@ class Parent extends Component {
         const { count } = this.state;
 
         return (
-            <section className = 'example'>
+            <section className = 'counter'>
                 <h1>Счётчик: {count}</h1>
-                <div>
-                    <button onClick = { this._decrement }>-</button>
-                    <button onClick = { this._reset }>Обнулить</button>
-                    <button onClick = { this._increment }>+</button>
-                </div>
+                <button onClick = { this._decrement }>-</button>
+                <button onClick = { this._reset }>Обнулить</button>
+                <button onClick = { this._increment }>+</button>
             </section>
         );
     }
 }
 
-render(<Parent />, document.getElementById('app'));
+render(<Counter />, document.getElementById('app'));

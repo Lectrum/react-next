@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { render } from 'react-dom';
 
-const Parent = () => {
+const Counter = () => {
     const [ countData, setCount ] = useState({
         count:          0,
         isCountStarted: false,
@@ -22,19 +22,16 @@ const Parent = () => {
     }));
 
     return (
-        <section className = 'example'>
+        <section className = 'counter'>
             <h1>
-                Счётчик: {countData.count}
-                ,&nbsp;
-                {countData.isCountStarted ? '' : 'не'} начал отсчёт
+                <span>Счётчик: {countData.count}</span>
+                <span>{countData.isCountStarted ? '✅' : '❌'}</span>
             </h1>
-            <div>
-                <button onClick = { _decrement }>-</button>
-                <button onClick = { _reset }>Обнулить</button>
-                <button onClick = { _increment }>+</button>
-            </div>
+            <button onClick = { _decrement }>-</button>
+            <button onClick = { _reset }>Обнулить</button>
+            <button onClick = { _increment }>+</button>
         </section>
     );
 };
 
-render(<Parent />, document.getElementById('app'));
+render(<Counter />, document.getElementById('app'));

@@ -5,13 +5,13 @@ import { render } from 'react-dom';
 // Code splitting
 const Tilt = lazy(() => import('./lazy/tilt'));
 
-export const Parent = () => {
+export const Example = () => {
     const [ isTiltShown, setIsTiltShown ] = useState(false);
 
-    const buttonText = isTiltShown ? 'Спрятать плашку' : 'Показать плашку';
+    const buttonText = isTiltShown ? '🙈 Спрятать плашку' : '🐵 Показать плашку';
 
     return (
-        <section className = 'example'>
+        <section className = 'tilt'>
             <button onClick = { () => setIsTiltShown(!isTiltShown) }>
                 {buttonText}
             </button>
@@ -22,4 +22,4 @@ export const Parent = () => {
     );
 };
 
-render(<Parent />, document.getElementById('app'));
+render(<Example />, document.getElementById('app'));

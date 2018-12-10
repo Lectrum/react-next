@@ -2,23 +2,17 @@
 import React, { useState } from 'react';
 import { render } from 'react-dom';
 
-const Parent = () => {
+const Counter = () => {
     const [ count, setCount ] = useState(0);
 
-    const _decrement = () => setCount(count - 1);
-    const _reset = () => setCount(0);
-    const _increment = () => setCount(count + 1);
-
     return (
-        <section className = 'example'>
+        <section className = 'counter'>
             <h1>Счётчик: {count}</h1>
-            <div>
-                <button onClick = { _decrement }>-</button>
-                <button onClick = { _reset }>Обнулить</button>
-                <button onClick = { _increment }>+</button>
-            </div>
+            <button onClick = { () => setCount(count - 1) }>-</button>
+            <button onClick = { () => setCount(0) }>Обнулить</button>
+            <button onClick = { () => setCount(count + 1) }>+</button>
         </section>
     );
 };
 
-render(<Parent />, document.getElementById('app'));
+render(<Counter />, document.getElementById('app'));

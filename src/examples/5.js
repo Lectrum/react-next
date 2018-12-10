@@ -4,9 +4,9 @@ import { render } from 'react-dom';
 
 const getInitialState = (baseValue, multiplier) => baseValue ** multiplier;
 
-const Parent = (props) => {
+const Counter = (props) => {
     /**
-     * Если useState в аргумент предать функцию
+     * Если useState в качестве аргумента предать функцию
      * для вычисления изначального состояния,
      * то она выполнится только при первом рендере.
      */
@@ -27,19 +27,17 @@ const Parent = (props) => {
     const _increment = () => setCount((prevCount) => prevCount + 1);
 
     return (
-        <section className = 'example'>
+        <section className = 'counter'>
             <h1>Счётчик: {count}</h1>
-            <div>
-                <button onClick = { _decrement }>-</button>
-                <button onClick = { _reset }>Обнулить</button>
-                <button onClick = { _increment }>+</button>
-            </div>
+            <button onClick = { _decrement }>-</button>
+            <button onClick = { _reset }>Обнулить</button>
+            <button onClick = { _increment }>+</button>
         </section>
     );
 };
 
 render(
-    <Parent
+    <Counter
         baseValue = { 3 }
         multiplier = { 4 }
     />,

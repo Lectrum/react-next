@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
 
-const Parent = () => {
+const Counter = () => {
     const [ count, setCount ] = useState(0);
 
     const _decrement = () => setCount(count - 1);
@@ -12,9 +12,9 @@ const Parent = () => {
     useEffect(() => {
         /**
          * Тело этой функции выполнится после каждого:
-         * - рендера;
-         * - коммита отрендеренной разметки в DOM;
-         * - последующей отрисовки браузером.
+         *   - рендера;
+         *   - коммита отрендеренной разметки в DOM;
+         *   - последующей отрисовки браузером.
          */
         console.log('⏳ useEffect');
         setTimeout(_increment, 1000);
@@ -24,18 +24,16 @@ const Parent = () => {
          */
     });
 
-    console.log('🖥 render');
+    console.log('🖥 рендер!');
 
     return (
-        <section className = 'example'>
+        <section className = 'counter'>
             <h1>Счётчик: {count}</h1>
-            <div>
-                <button onClick = { _decrement }>-</button>
-                <button onClick = { _reset }>Обнулить</button>
-                <button onClick = { _increment }>+</button>
-            </div>
+            <button onClick = { _decrement }>-</button>
+            <button onClick = { _reset }>Обнулить</button>
+            <button onClick = { _increment }>+</button>
         </section>
     );
 };
 
-render(<Parent />, document.getElementById('app'));
+render(<Counter />, document.getElementById('app'));

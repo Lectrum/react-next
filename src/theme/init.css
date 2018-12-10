@@ -6,5 +6,7 @@
 @import './globals.css';
 
 /* Components */
+@import './components/common.css';
+@import './components/counter.css';
 @import './components/stopwatch.css';
-@import './components/example.css';
+@import './components/tilt.css';

@@ -1,0 +1,77 @@
+#app {
+    display: grid;
+    grid-template-columns: 1fr minmax(600px, auto) 1fr;
+    grid-template-rows: 1fr auto auto 1fr;
+    grid-template-areas:
+        '. . .'
+        '. example-1 .'
+        '. example-2 .';
+    min-height: 100vh;
+    background-color: #16161A;
+}
+
+.counter {
+    grid-area: example-1;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(3, minmax(70px, auto));
+    justify-items: center;
+    justify-content: center;
+    color: wheat;
+    user-select: none;
+}
+
+.counter-1 {
+    grid-area: example-1;
+    margin-bottom: 40px;
+}
+
+.counter-2 {
+    grid-area: example-2;
+}
+
+.counter h1 {
+    grid-column: 1 / -1;
+    font-size: 38px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.counter span {
+    display: block;
+}
+
+.counter span:not(:last-child) {
+    margin-bottom: 10px;
+}
+.counter button:nth-child(2) {
+    justify-self: end;
+}
+.counter button:last-child {
+    justify-self: start;
+}
+
+.counter h1 {
+    text-align: center;
+}
+
+.counter input {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+    outline: none;
+    background-color: transparent;
+    border: 1px solid currentColor;
+    border-radius: 7px;
+    color: wheat;
+    padding: 5px 10px;
+}
+.counter input + button:last-child {
+    grid-column: 2;
+    grid-row: 3;
+    justify-self: center;
+}
+
+.counter input:disabled {
+    color: grey;
+}

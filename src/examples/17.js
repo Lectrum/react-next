@@ -26,19 +26,19 @@ const Parent = () => {
     const buttonText = isRunning ? '🏁 Стоп' : '🎬 Старт';
 
     return (
-        <section className = 'example'>
-            <Title count = { count } />
-            <div>
+        <>
+            <section className = 'counter'>
+                <Title count = { count } />
                 <button onClick = { _decrement }>-</button>
                 <button onClick = { _reset }>Обнулить</button>
                 <button onClick = { _increment }>+</button>
-            </div>
+            </section>
             <section className = 'stopwatch'>
                 <code>{lapse} мс</code>
                 <button onClick = { toggleRun }>{buttonText}</button>
                 <button onClick = { clear }>Очистить</button>
             </section>
-        </section>
+        </>
     );
 };
 

@@ -23,7 +23,7 @@ const Parent = () => {
         console.log('⏳ useEffect');
 
         return () => {
-            console.log('⌛️ clearing');
+            console.log('⌛️ очистка!');
             clearInterval(timer);
         };
         /**
@@ -35,16 +35,14 @@ const Parent = () => {
          */
     }, []);
 
-    console.log('🖥 render, count', count);
+    console.log('🖥 рендер! count:', count);
 
     return (
-        <section className = 'example'>
+        <section className = 'counter'>
             <h1>Счётчик: {count}</h1>
-            <div>
-                <button onClick = { _decrement }>-</button>
-                <button onClick = { _reset }>Обнулить</button>
-                <button onClick = { _increment }>+</button>
-            </div>
+            <button onClick = { _decrement }>-</button>
+            <button onClick = { _reset }>Обнулить</button>
+            <button onClick = { _increment }>+</button>
         </section>
     );
 };

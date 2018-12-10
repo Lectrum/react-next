@@ -12,7 +12,7 @@ const stopwatchReducer = (currentState, newState) => {
 };
 
 const Stopwatch = () => {
-    /**                          ↓ почти как this.setState */
+    /**                          ↓ почти как this.setState у классов */
     const [{ isRunning, lapse }, setState ] = useReducer(stopwatchReducer, {
         isRunning: false,
         lapse:     0,
@@ -43,11 +43,11 @@ const Stopwatch = () => {
     const buttonText = isRunning ? '🏁 Стоп' : '🎬 Старт';
 
     return (
-        <div className = 'stopwatch'>
+        <section className = 'stopwatch'>
             <code>{lapse} мс</code>
             <button onClick = { _toggleRun }>{buttonText}</button>
             <button onClick = { _clear }>Очистить</button>
-        </div>
+        </section>
     );
 };
 
