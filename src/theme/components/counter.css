@@ -1,15 +1,3 @@
-#app {
-    display: grid;
-    grid-template-columns: 1fr minmax(600px, auto) 1fr;
-    grid-template-rows: 1fr auto auto 1fr;
-    grid-template-areas:
-        '. . .'
-        '. example-1 .'
-        '. example-2 .';
-    min-height: 100vh;
-    background-color: #16161A;
-}
-
 .counter {
     grid-area: example-1;
     display: grid;
