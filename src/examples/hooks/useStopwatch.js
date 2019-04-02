@@ -29,7 +29,7 @@ const stopwatchReducer = (state, action) => {
     }
 };
 
-export const useStopWatch = () => {
+export const useStopwatch = () => {
     const [{ isRunning, lapse }, dispatch ] = useReducer(stopwatchReducer, {
         isRunning: false,
         lapse:     0,

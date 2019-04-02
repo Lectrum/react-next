@@ -5,9 +5,9 @@ import { render } from 'react-dom';
 const Counter = () => {
     const [ count, setCount ] = useState(0);
 
-    const _decrement = () => setCount(count - 1);
-    const _reset = () => setCount(0);
-    const _increment = () => setCount(count + 1);
+    const decrement = () => setCount(count - 1);
+    const reset = () => setCount(0);
+    const increment = () => setCount(count + 1);
 
     useEffect(() => {
         /**
@@ -17,7 +17,7 @@ const Counter = () => {
          *   - последующей отрисовки браузером.
          */
         console.log('⏳ useEffect');
-        setTimeout(_increment, 1000);
+        setTimeout(increment, 1000);
         /**
          * То есть хук useEffect делает отложенный вызов
          * функции, которую он принимает в первом аргументе.
@@ -29,9 +29,9 @@ const Counter = () => {
     return (
         <section className = 'counter'>
             <h1>Счётчик: {count}</h1>
-            <button onClick = { _decrement }>-</button>
-            <button onClick = { _reset }>Обнулить</button>
-            <button onClick = { _increment }>+</button>
+            <button onClick = { decrement }>-</button>
+            <button onClick = { reset }>Обнулить</button>
+            <button onClick = { increment }>+</button>
         </section>
     );
 };

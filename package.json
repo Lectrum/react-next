@@ -9,15 +9,13 @@
         "eject": "react-scripts eject"
     },
     "dependencies": {
-        "react": "16.7.0-alpha.2",
-        "react-dom": "16.7.0-alpha.2",
+        "react": "16.8.6",
+        "react-dom": "16.8.6",
         "react-vanilla-tilt": "1.0.0",
         "sanitize.css": "8.0.0"
     },
     "devDependencies": {
-        "@lectrum/eslint-config-core": "1.1.10",
-        "babel-eslint": "9.0.0",
-        "eslint": "5.6.0",
-        "react-scripts": "2.1.1"
+        "@lectrum/eslint-config-core": "1.1.15",
+        "react-scripts": "2.1.8"
     }
 }

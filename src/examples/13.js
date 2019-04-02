@@ -10,21 +10,11 @@ const stopwatchReducer = (state, action) => {
                 lapse: action.payload.currentTime - action.payload.startTime,
             };
         case 'START_RUNNING':
-            return {
-                ...state,
-                isRunning: true,
-            };
+            return { ...state, isRunning: true };
         case 'STOP_RUNNING':
-            return {
-                ...state,
-                isRunning: false,
-            };
+            return { ...state, isRunning: false };
         case 'RESET':
-            return {
-                ...state,
-                lapse:     0,
-                isRunning: false,
-            };
+            return { ...state, lapse: 0, isRunning: false };
         default:
             return state;
     }
@@ -33,9 +23,7 @@ const stopwatchReducer = (state, action) => {
 const Stopwatch = () => {
     /**
      * Механизм работы useReducer идентичен по отношению к Redux.
-     * Если ты раньше юзал Redux, то useReducer для тебя как аквариум
-     * для рыбки. Или мягкий коврик для котика.
-     * 🐈
+     * Если ты раньше использовал Redux, то считай, что механизм ты уже знаешь.
      */
     const [{ isRunning, lapse }, dispatch ] = useReducer(
         // 1-й аргумент — редьюсер.
@@ -44,11 +32,6 @@ const Stopwatch = () => {
         {
             isRunning: false,
             lapse:     0,
-        },
-        // 3-й опциональный аргумент — экшен, который нужно запустить во время первого рендера.
-        {
-            type:    'SET_LAPSE',
-            payload: { currentTime: 100, startTime: 50 },
         },
     );
     const intervalRef = useRef(null);

@@ -12,18 +12,18 @@ const Counter = () => {
     const [ count, setCount ] = useState(0);
 
     /* Хук useCallback(fn, inputs) эквивалентен хуку useMemo(() => fn, inputs) */
-    const _decrement = useCallback(() => setCount((prevCount) => prevCount - 1));
-    const _reset = useCallback(() => setCount(0));
-    const _increment = useMemo(() => () => setCount((prevCount) => prevCount + 1));
+    const decrement = useCallback(() => setCount((prevCount) => prevCount - 1), []);
+    const reset = useCallback(() => setCount(0), []);
+    const increment = useMemo(() => () => setCount((prevCount) => prevCount + 1), []);
 
     console.log('→ 🖥 Рендер родителя');
 
     return (
         <section className = 'counter'>
             <h1>Счётчик: {count}</h1>
-            <Button handleClick = { _decrement }>-</Button>
-            <Button handleClick = { _reset }>Обнулить</Button>
-            <Button handleClick = { _increment }>+</Button>
+            <Button handleClick = { decrement }>-</Button>
+            <Button handleClick = { reset }>Обнулить</Button>
+            <Button handleClick = { increment }>+</Button>
         </section>
     );
 };

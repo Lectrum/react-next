@@ -3,10 +3,10 @@ import React, { memo, useState } from 'react';
 import { render } from 'react-dom';
 
 // Hooks
-import { useStopWatch, useRandomColor } from './hooks';
+import { useStopwatch, useRandomColor } from './hooks';
 
 /**
- * memo — аналог метода жизненного цикла shouldComponentUpdate,
+ * memo — это аналог shouldComponentUpdate,
  * только для функциональных компонентов.
  */
 const Title = memo((props) => {
@@ -17,26 +17,22 @@ const Title = memo((props) => {
 
 const Parent = () => {
     const [ count, setCount ] = useState(0);
-    const { lapse, clear, isRunning, toggleRun } = useStopWatch();
+    const stopwatch = useStopwatch();
 
-    const _decrement = () => setCount((prevCount) => prevCount - 1);
-    const _reset = () => setCount(0);
-    const _increment = () => setCount((prevCount) => prevCount + 1);
-
-    const buttonText = isRunning ? '🏁 Стоп' : '🎬 Старт';
+    const buttonText = stopwatch.isRunning ? '🏁 Стоп' : '🎬 Старт';
 
     return (
         <>
             <section className = 'counter'>
                 <Title count = { count } />
-                <button onClick = { _decrement }>-</button>
-                <button onClick = { _reset }>Обнулить</button>
-                <button onClick = { _increment }>+</button>
+                <button onClick = { () => setCount(count - 1) }>-</button>
+                <button onClick = { () => setCount(0) }>Обнулить</button>
+                <button onClick = { () => setCount(count + 1) }>+</button>
             </section>
             <section className = 'stopwatch'>
-                <code>{lapse} мс</code>
-                <button onClick = { toggleRun }>{buttonText}</button>
-                <button onClick = { clear }>Очистить</button>
+                <code>{stopwatch.lapse} мс</code>
+                <button onClick = { stopwatch.toggleRun }>{buttonText}</button>
+                <button onClick = { stopwatch.clear }>Очистить</button>
             </section>
         </>
     );

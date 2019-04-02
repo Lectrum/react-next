@@ -7,15 +7,9 @@ const Counter = () => {
     const [ isEditing, setIsEditing ] = useState(false);
     const nameInputRef = useRef(null);
 
-    const _setName = (event) => setName(event.target.value);
-    const _toggleIsEditing = () => setIsEditing(!isEditing);
-
-    useEffect(
-        () => {
-            nameInputRef.current.focus();
-        },
-        [ isEditing ],
-    );
+    useEffect(() => {
+        nameInputRef.current.focus();
+    }, [ isEditing ]);
 
     const buttonText = isEditing ? 'Заблокировать' : 'Разблокировать';
 
@@ -26,9 +20,11 @@ const Counter = () => {
                 disabled = { !isEditing }
                 ref = { nameInputRef }
                 value = { name }
-                onChange = { _setName }
+                onChange = { (event) => setName(event.target.value) }
             />
-            <button onClick = { _toggleIsEditing }>{buttonText}</button>
+            <button onClick = { () => setIsEditing(!isEditing) }>
+                {buttonText}
+            </button>
         </section>
     );
 };

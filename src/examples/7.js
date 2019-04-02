@@ -5,12 +5,12 @@ import { render } from 'react-dom';
 const Counter = () => {
     const [ count, setCount ] = useState(0);
 
-    const _decrement = () => setCount(count - 1);
-    const _reset = () => setCount(0);
-    const _increment = () => setCount(count + 1);
+    const decrement = () => setCount(count - 1);
+    const reset = () => setCount(0);
+    const increment = () => setCount(count + 1);
 
     useEffect(() => {
-        const timer = setTimeout(_increment, 1000);
+        const timer = setTimeout(increment, 1000);
 
         console.log('⏳ useEffect');
 
@@ -33,12 +33,14 @@ const Counter = () => {
          */
     });
 
+    console.log('🖥 рендер!');
+
     return (
         <section className = 'counter'>
             <h1>Счётчик: {count}</h1>
-            <button onClick = { _decrement }>-</button>
-            <button onClick = { _reset }>Обнулить</button>
-            <button onClick = { _increment }>+</button>
+            <button onClick = { decrement }>-</button>
+            <button onClick = { reset }>Обнулить</button>
+            <button onClick = { increment }>+</button>
         </section>
     );
 };

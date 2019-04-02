@@ -3,33 +3,33 @@ import React, { useState } from 'react';
 import { render } from 'react-dom';
 
 const Counter = () => {
-    const [ countData, setCount ] = useState({
-        count:          0,
-        isCountStarted: false,
+    const [ state, setState ] = useState({
+        count:     0,
+        isTouched: false,
     });
 
-    const _decrement = () => setCount((prevCountData) => ({
-        count:          prevCountData.count - 1,
-        isCountStarted: true,
+    const decrement = () => setState((prevState) => ({
+        count:     prevState.count - 1,
+        isTouched: true,
     }));
-    const _reset = () => setCount((prevCountData) => ({
-        ...prevCountData,
+    const reset = () => setState((prevState) => ({
+        ...prevState,
         count: 0,
     }));
-    const _increment = () => setCount((prevCountData) => ({
-        count:          prevCountData.count + 1,
-        isCountStarted: true,
+    const increment = () => setState((prevState) => ({
+        count:     prevState.count + 1,
+        isTouched: true,
     }));
 
     return (
         <section className = 'counter'>
             <h1>
-                <span>Счётчик: {countData.count}</span>
-                <span>{countData.isCountStarted ? '✅' : '❌'}</span>
+                <span>Счётчик: {state.count}</span>
+                <span>{state.isTouched ? '✅' : '❌'}</span>
             </h1>
-            <button onClick = { _decrement }>-</button>
-            <button onClick = { _reset }>Обнулить</button>
-            <button onClick = { _increment }>+</button>
+            <button onClick = { decrement }>-</button>
+            <button onClick = { reset }>Обнулить</button>
+            <button onClick = { increment }>+</button>
         </section>
     );
 };

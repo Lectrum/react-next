@@ -7,7 +7,7 @@ const Stopwatch = () => {
     const [ isRunning, setRunning ] = useState(false);
     const intervalRef = useRef(null);
 
-    const _toggleRun = () => {
+    const toggleRun = () => {
         if (isRunning) {
             clearInterval(intervalRef.current);
         } else {
@@ -20,7 +20,7 @@ const Stopwatch = () => {
         setRunning(!isRunning);
     };
 
-    const _clear = () => {
+    const clear = () => {
         clearInterval(intervalRef.current);
         setLapse(0);
         setRunning(false);
@@ -33,8 +33,8 @@ const Stopwatch = () => {
     return (
         <section className = 'stopwatch'>
             <code>{lapse} мс</code>
-            <button onClick = { _toggleRun }>{buttonText}</button>
-            <button onClick = { _clear }>Очистить</button>
+            <button onClick = { toggleRun }>{buttonText}</button>
+            <button onClick = { clear }>Очистить</button>
         </section>
     );
 };

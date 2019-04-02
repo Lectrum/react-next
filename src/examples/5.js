@@ -22,16 +22,16 @@ const Counter = (props) => {
      * вычисление для получения изначального состояния.
      */
 
-    const _decrement = () => setCount((prevCount) => prevCount - 1);
-    const _reset = () => setCount(0);
-    const _increment = () => setCount((prevCount) => prevCount + 1);
-
     return (
         <section className = 'counter'>
             <h1>Счётчик: {count}</h1>
-            <button onClick = { _decrement }>-</button>
-            <button onClick = { _reset }>Обнулить</button>
-            <button onClick = { _increment }>+</button>
+            <button onClick = { () => setCount((prevCount) => prevCount - 1) }>
+                -
+            </button>
+            <button onClick = { () => setCount(0) }>Обнулить</button>
+            <button onClick = { () => setCount((prevCount) => prevCount + 1) }>
+                +
+            </button>
         </section>
     );
 };

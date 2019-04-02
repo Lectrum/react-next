@@ -2,14 +2,15 @@
 import React, { useReducer, useRef, useEffect } from 'react';
 import { render } from 'react-dom';
 
-const stopwatchReducer = (currentState, newState) => {
-    /**
-     * Таким образом можно реализовать
-     * поведение, похожее на вызов
-     * this.setState в классовых компонентах.
-     */
-    return { ...currentState, ...newState };
-};
+/**
+ * Таким образом можно реализовать
+ * поведение, похожее на вызов
+ * this.setState в классовых компонентах.
+ */
+const stopwatchReducer = (currentState, newState) => ({
+    ...currentState,
+    ...newState,
+});
 
 const Stopwatch = () => {
     /**                          ↓ почти как this.setState у классов */

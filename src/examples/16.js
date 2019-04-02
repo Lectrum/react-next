@@ -3,15 +3,15 @@ import React from 'react';
 import { render } from 'react-dom';
 
 // Hooks
-import { useStopWatch } from './hooks';
+import { useStopwatch } from './hooks';
 
 const Stopwatch = () => {
     /**
      * Вынесение логики в кастомные хуки позволяет элегантным путём решить проблему,
      * которую пытались решить паттерны Higher Order Component и Render Props.
      */
-    const watch1 = useStopWatch();
-    const watch2 = useStopWatch();
+    const watch1 = useStopwatch();
+    const watch2 = useStopwatch();
 
     const buttonText1 = watch1.isRunning ? '🏁 Стоп' : '🎬 Старт';
     const buttonText2 = watch2.isRunning ? '🏁 Стоп' : '🎬 Старт';

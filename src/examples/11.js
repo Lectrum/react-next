@@ -2,7 +2,7 @@
 import React, {
     forwardRef,
     useRef,
-    useImperativeMethods,
+    useImperativeHandle,
     useState,
     useEffect,
 } from 'react';
@@ -11,7 +11,7 @@ import { render } from 'react-dom';
 const Child = forwardRef((props, ref) => {
     const nameInputRef = useRef(null);
 
-    useImperativeMethods(ref, () => {
+    useImperativeHandle(ref, () => {
         return {
             focusImperatively: () => {
                 nameInputRef.current.focus();
@@ -34,15 +34,9 @@ const Parent = () => {
     const [ isEditing, setIsEditing ] = useState(false);
     const childRef = useRef(null);
 
-    const _setName = (event) => setName(event.target.value);
-    const _toggleIsEditing = () => setIsEditing(!isEditing);
-
-    useEffect(
-        () => {
-            childRef.current.focusImperatively();
-        },
-        [ isEditing ],
-    );
+    useEffect(() => {
+        childRef.current.focusImperatively();
+    }, [ isEditing ]);
 
     const buttonText = isEditing ? 'Заблокировать' : 'Разблокировать';
 
@@ -50,12 +44,14 @@ const Parent = () => {
         <section className = 'counter'>
             <h1>{name}</h1>
             <Child
-                _setName = { _setName }
+                _setName = { (event) => setName(event.target.value) }
                 isEditing = { isEditing }
                 name = { name }
                 ref = { childRef }
             />
-            <button onClick = { _toggleIsEditing }>{buttonText}</button>
+            <button onClick = { () => setIsEditing(!isEditing) }>
+                {buttonText}
+            </button>
         </section>
     );
 };

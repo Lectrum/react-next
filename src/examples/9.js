@@ -7,15 +7,15 @@ const Parent = () => {
 
     const _decrement = () => setCount(count - 1);
     const _reset = () => setCount(0);
-    const _increment = () => setCount(count + 1);
-    // const _increment = () => {
-    //     setCount((prevCount) => {
-    //         // console.log('⌚️ setCount, count', count);
-    //         // console.log('⌚️ setCount, prevCount', prevCount);
+    // const _increment = () => setCount(count + 1);
+    const _increment = () => {
+        setCount((prevCount) => {
+            console.log('⌚️ setCount, count', count);
+            console.log('⌚️ setCount, prevCount', prevCount);
 
-    //         return prevCount + 1;
-    //     });
-    // };
+            return prevCount + 1;
+        });
+    };
 
     useEffect(() => {
         const timer = setInterval(_increment, 1000);

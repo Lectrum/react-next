@@ -7,14 +7,14 @@ import { useCounter } from './hooks';
 
 const Counter = () => {
     /** Выносим сложную логику в абстракцию — кастомный хук. */
-    const { count, _decrement, _reset, _increment } = useCounter(5, 2);
+    const counter = useCounter(5, 2);
 
     return (
         <section className = 'counter'>
-            <h1>Счётчик: {count}</h1>
-            <button onClick = { _decrement }>-</button>
-            <button onClick = { _reset }>Обнулить</button>
-            <button onClick = { _increment }>+</button>
+            <h1>Счётчик: {counter.count}</h1>
+            <button onClick = { counter.decrement }>-</button>
+            <button onClick = { counter.reset }>Обнулить</button>
+            <button onClick = { counter.increment }>+</button>
         </section>
     );
 };
