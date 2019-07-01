@@ -1,51 +1,33 @@
 /**
- * Таким способом, с помощью useReducer можно реализовать поведение,
- * похожее на вызов this.setState в классовых компонентов.
+ * Вынесение логики в кастомные хуки позволяет элегантным путём решить проблему,
+ * которую пытались решить паттерны Higher Order Component и Render Props.
  */
-import React, { useReducer, useRef, useEffect } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 
-const stopwatchReducer = (currentState, newState) => ({
-    ...currentState,
-    ...newState,
-});
+import { useStopwatch } from './hooks';
 
 const Stopwatch = () => {
-    const [{ isRunning, lapse }, setState ] = useReducer(stopwatchReducer, {
-        isRunning: false,
-        lapse:     0,
-    });
-    const intervalRef = useRef(null);
+    const watch1 = useStopwatch();
+    const watch2 = useStopwatch();
 
-    const toggleRun = () => {
-        if (isRunning) {
-            clearInterval(intervalRef.current);
-        } else {
-            const startTime = Date.now() - lapse;
-            intervalRef.current = setInterval(() => {
-                setState({
-                    lapse: Date.now() - startTime,
-                });
-            }, 0);
-        }
-        setState({ isRunning: !isRunning });
-    };
-
-    const clear = () => {
-        clearInterval(intervalRef.current);
-        setState({ lapse: 0, isRunning: false });
-    };
-
-    useEffect(() => () => clearInterval(intervalRef.current), []);
-
-    const buttonText = isRunning ? '🏁 Стоп' : '🎬 Старт';
+    const buttonText1 = watch1.isRunning ? '🏁 Стоп' : '🎬 Старт';
+    const buttonText2 = watch2.isRunning ? '🏁 Стоп' : '🎬 Старт';
 
     return (
-        <section className = 'stopwatch'>
-            <code>{lapse} мс</code>
-            <button onClick = { toggleRun }>{buttonText}</button>
-            <button onClick = { clear }>Очистить</button>
-        </section>
+        <div className = 'stopwatch'>
+            <code>{watch1.lapse} мс</code>
+            <button onClick = { watch1.toggleRun }>{buttonText1}</button>
+            <button onClick = { watch1.clear }>Очистить</button>
+            <b />
+            <code className = 'difference'>
+                Разница: {watch1.lapse - watch2.lapse} мс
+            </code>
+            <b />
+            <code>{watch2.lapse} мс</code>
+            <button onClick = { watch2.toggleRun }>{buttonText2}</button>
+            <button onClick = { watch2.clear }>Очистить</button>
+        </div>
     );
 };
 

@@ -1,40 +1,39 @@
 /**
- * Данный пример демонстрирует, как на хуках можно сделать
- * состояние с похожим поведением как в классовых компонентах.
+ * Если useState в качестве аргумента предать функцию
+ * для вычисления изначального состояния,
+ * то она выполнится только при первом рендере.
  */
 import React, { useState } from 'react';
 import { render } from 'react-dom';
 
-const Counter = () => {
-    const [ state, setState ] = useState({
-        count:     0,
-        isTouched: false,
-    });
+const getInitialState = (baseValue, multiplier) => baseValue ** multiplier;
 
-    const decrement = () => setState((prevState) => ({
-        count:     prevState.count - 1,
-        isTouched: true,
-    }));
-    const reset = () => setState((prevState) => ({
-        ...prevState,
-        count: 0,
-    }));
-    const increment = () => setState((prevState) => ({
-        count:     prevState.count + 1,
-        isTouched: true,
-    }));
+const Counter = (props) => {
+    const [ count, setCount ] = useState(() => {
+        console.log('✅ вычисляется один раз');
+        const initialState = getInitialState(props.baseValue, props.multiplier);
+
+        return initialState;
+    });
 
     return (
         <section className = 'counter'>
-            <h1>
-                <span>Счётчик: {state.count}</span>
-                <span>{state.isTouched ? '✅' : '❌'}</span>
-            </h1>
-            <button onClick = { decrement }>-</button>
-            <button onClick = { reset }>Обнулить</button>
-            <button onClick = { increment }>+</button>
+            <h1>Счётчик: {count}</h1>
+            <button onClick = { () => setCount((prevCount) => prevCount - 1) }>
+                -
+            </button>
+            <button onClick = { () => setCount(0) }>Обнулить</button>
+            <button onClick = { () => setCount((prevCount) => prevCount + 1) }>
+                +
+            </button>
         </section>
     );
 };
 
-render(<Counter />, document.getElementById('app'));
+render(
+    <Counter
+        baseValue = { 3 }
+        multiplier = { 4 }
+    />,
+    document.getElementById('app'),
+);

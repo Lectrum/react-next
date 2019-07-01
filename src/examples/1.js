@@ -1,3 +1,6 @@
+/**
+ * Пример использования классового компонента.
+ */
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 

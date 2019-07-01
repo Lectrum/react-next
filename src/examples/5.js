@@ -1,39 +1,39 @@
 /**
- * Если useState в качестве аргумента предать функцию
- * для вычисления изначального состояния,
- * то она выполнится только при первом рендере.
+ * Хук useEffect используется доя обработки сайд-эффектов в компонентах React.
+ * В первом аргументе useEffect принимает коллбек, который содержит логику сайд-эффекта.
+ *
+ * Тело функции выполнится после каждого:
+ *   - рендера;
+ *   - коммита отрендеренной разметки в DOM;
+ *   - последующей отрисовки браузером.
+ *
+ * Хук useEffect делает отложенный вызов функции, которую он принимает в первом аргументе.
  */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
 
-const getInitialState = (baseValue, multiplier) => baseValue ** multiplier;
+const Counter = () => {
+    const [ count, setCount ] = useState(0);
 
-const Counter = (props) => {
-    const [ count, setCount ] = useState(() => {
-        console.log('✅ вычисляется один раз');
-        const initialState = getInitialState(props.baseValue, props.multiplier);
+    const decrement = () => setCount(count - 1);
+    const reset = () => setCount(0);
+    const increment = () => setCount(count + 1);
 
-        return initialState;
+    useEffect(() => {
+        console.log('⏳ useEffect');
+        setTimeout(increment, 1000);
     });
+
+    console.log('🖥 Рендер!');
 
     return (
         <section className = 'counter'>
             <h1>Счётчик: {count}</h1>
-            <button onClick = { () => setCount((prevCount) => prevCount - 1) }>
-                -
-            </button>
-            <button onClick = { () => setCount(0) }>Обнулить</button>
-            <button onClick = { () => setCount((prevCount) => prevCount + 1) }>
-                +
-            </button>
+            <button onClick = { decrement }>-</button>
+            <button onClick = { reset }>Обнулить</button>
+            <button onClick = { increment }>+</button>
         </section>
     );
 };
 
-render(
-    <Counter
-        baseValue = { 3 }
-        multiplier = { 4 }
-    />,
-    document.getElementById('app'),
-);
+render(<Counter />, document.getElementById('app'));

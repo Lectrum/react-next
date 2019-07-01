@@ -1,42 +1,27 @@
 // Core
-import React, { useState, useMemo } from 'react';
+import React, { lazy, useState, Suspense } from 'react';
 import { render } from 'react-dom';
 
-const getMultiplier = (a, b) => {
-    console.log('✅ Вычисляется только при изменении одного из аргументов.');
+// Code splitting
+const Tilt = lazy(() => import('./lazy/tilt'));
 
-    return a ** b;
-};
+export const Example = () => {
+    const [ isTiltShown, setIsTiltShown ] = useState(false);
 
-const Counter = ({ firstValue, secondValue }) => {
-    const [ count, setCount ] = useState(0);
-    const memoizedMultiplier = useMemo(
-        () => getMultiplier(firstValue, secondValue),
-        /**
-         * Функция-вычислитель ↑ выполнится снова
-         * только в том, случае, если изменится
-         * хотя-бы одно из этих ↓ значений.
-         */
-        [ firstValue, secondValue ],
-    );
+    const buttonText = isTiltShown
+        ? '🙈 Спрятать плашку'
+        : '🐵 Показать плашку';
 
     return (
-        <section className = 'counter'>
-            <h1>
-                <span>Счётчик, умноженный на {memoizedMultiplier}:</span>
-                <span>{count * memoizedMultiplier}</span>
-            </h1>
-            <button onClick = { () => setCount(count - 1) }>-</button>
-            <button onClick = { () => setCount(0) }>Обнулить</button>
-            <button onClick = { () => setCount(count + 1) }>+</button>
+        <section className = 'tilt'>
+            <button onClick = { () => setIsTiltShown(!isTiltShown) }>
+                {buttonText}
+            </button>
+            <Suspense fallback = { <h1>Загружаю...</h1> }>
+                {isTiltShown && <Tilt />}
+            </Suspense>
         </section>
     );
 };
 
-render(
-    <Counter
-        firstValue = { 3 }
-        secondValue = { 4 }
-    />,
-    document.getElementById('app'),
-);
+render(<Example />, document.getElementById('app'));

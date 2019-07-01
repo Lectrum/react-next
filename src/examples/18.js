@@ -1,36 +1,39 @@
-// Core
-import React from 'react';
+/**
+ * Хук useMemo предназначен для мемоизации функции.
+ */
+import React, { useState, useMemo } from 'react';
 import { render } from 'react-dom';
 
-// Hooks
-import { useStopwatch } from './hooks';
+const getMultiplier = (operand1, operand2) => {
+    console.log('✅ Вычисляется только при изменении одного из аргументов.');
 
-const Stopwatch = () => {
-    /**
-     * Вынесение логики в кастомные хуки позволяет элегантным путём решить проблему,
-     * которую пытались решить паттерны Higher Order Component и Render Props.
-     */
-    const watch1 = useStopwatch();
-    const watch2 = useStopwatch();
+    return operand1 ** operand2;
+};
 
-    const buttonText1 = watch1.isRunning ? '🏁 Стоп' : '🎬 Старт';
-    const buttonText2 = watch2.isRunning ? '🏁 Стоп' : '🎬 Старт';
+const Counter = ({ firstValue, secondValue }) => {
+    const [ count, setCount ] = useState(0);
+    const memoizedMultiplier = useMemo(
+        () => getMultiplier(firstValue, secondValue),
+        [ firstValue, secondValue ],
+    );
 
     return (
-        <div className = 'stopwatch'>
-            <code>{watch1.lapse} мс</code>
-            <button onClick = { watch1.toggleRun }>{buttonText1}</button>
-            <button onClick = { watch1.clear }>Очистить</button>
-            <b />
-            <code className = 'difference'>
-                Разница: {watch1.lapse - watch2.lapse} мс
-            </code>
-            <b />
-            <code>{watch2.lapse} мс</code>
-            <button onClick = { watch2.toggleRun }>{buttonText2}</button>
-            <button onClick = { watch2.clear }>Очистить</button>
-        </div>
+        <section className = 'counter'>
+            <h1>
+                <span>Счётчик, умноженный на {memoizedMultiplier}:</span>
+                <span>{count * memoizedMultiplier}</span>
+            </h1>
+            <button onClick = { () => setCount(count - 1) }>-</button>
+            <button onClick = { () => setCount(0) }>Обнулить</button>
+            <button onClick = { () => setCount(count + 1) }>+</button>
+        </section>
     );
 };
 
-render(<Stopwatch />, document.getElementById('app'));
+render(
+    <Counter
+        firstValue = { 3 }
+        secondValue = { 4 }
+    />,
+    document.getElementById('app'),
+);

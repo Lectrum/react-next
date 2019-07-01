@@ -1,10 +1,7 @@
 /**
- * Второй аргумент useEffect является не обязательный.
- * Это массив. Он принимает набор значений.
- * Коллбек useEffect не будет выполняться, если значения из этого массива не изменились.
- * При этом коллбек всё равно выполниться как минимум:
- * - при первом рендере;
- * - при удалении анмаунтинге компонента.
+ * Массив, переданный во второй аргумент useEffect можно заполнить значениями.
+ * После рендере коллбек useEffect не будет выполняться,
+ * если значения из этого массива не изменились.
  *
  * О useEffect такой формы можно думать,
  * как о componentDidMount + componentDidUpdate + componentWillUnmount.
@@ -12,33 +9,34 @@
 import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
 
-const getInitialState = () => Number(localStorage.getItem('count')) || 0;
+const Parent = () => {
+    const [ count, setCount ] = useState(0);
 
-const Counter = () => {
-    const [ count1, setCount1 ] = useState(getInitialState);
-    const [ count2, setCount2 ] = useState(0);
+    const decrement = () => setCount(count - 1);
+    const reset = () => setCount(0);
+    const increment = () => setCount(count + 1);
 
     useEffect(() => {
-        console.log('📦 Запись в localStorage', count1);
-        localStorage.setItem('count', count1);
-    }, [ count1 ]);
+        const timer = setInterval(increment, 1000);
+
+        console.log('⏳ useEffect');
+
+        return () => {
+            console.log('⌛️ Очистка!');
+            clearInterval(timer);
+        };
+    }, [ increment ]);
+
+    console.log('🖥 Рендер!', count);
 
     return (
-        <>
-            <section className = 'counter counter-1'>
-                <h1>Первый счётчик: {count1}</h1>
-                <button onClick = { () => setCount1(count1 - 1) }>-</button>
-                <button onClick = { () => setCount1(0) }>Обнулить</button>
-                <button onClick = { () => setCount1(count1 + 1) }>+</button>
-            </section>
-            <section className = 'counter counter-2'>
-                <h1>Второй счётчик: {count2}</h1>
-                <button onClick = { () => setCount2(count2 - 1) }>-</button>
-                <button onClick = { () => setCount2(0) }>Обнулить</button>
-                <button onClick = { () => setCount2(count2 + 1) }>+</button>
-            </section>
-        </>
+        <section className = 'counter'>
+            <h1>Счётчик: {count}</h1>
+            <button onClick = { decrement }>-</button>
+            <button onClick = { reset }>Обнулить</button>
+            <button onClick = { increment }>+</button>
+        </section>
     );
 };
 
-render(<Counter />, document.getElementById('app'));
+render(<Parent />, document.getElementById('app'));

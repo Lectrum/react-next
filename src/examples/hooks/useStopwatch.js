@@ -1,4 +1,13 @@
-// Core
+/**
+ * Для более комплексного управления состоянием компонента можно использовать хук useReducer.
+ *
+ * Механизм работы useReducer идентичен по отношению к Redux.
+ * Если ты раньше использовал Redux, то считай, что механизм ты уже знаешь.
+ *
+ * 1-й аргумент useReducer — это функция-редьюсер;
+ * 2-й аргумент useReducer — изначальное состояние для редьюсера.
+ */
+
 import { useReducer, useRef, useEffect } from 'react';
 
 const stopwatchReducer = (state, action) => {

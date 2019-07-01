@@ -1,41 +1,41 @@
-// Core
-import React, { memo, useState } from 'react';
+/**
+ * Хук useCallback похож на хук useCallback.
+ *
+ * useCallback(fn, inputs)
+ * useMemo(() => fn, inputs)
+ */
+import React, { memo, useState, useCallback } from 'react';
 import { render } from 'react-dom';
 
-// Hooks
-import { useStopwatch, useRandomColor } from './hooks';
+const Button = memo((props) => {
+    console.log('→ 🖥 Рендер потомка', props);
 
-/**
- * memo — это аналог shouldComponentUpdate,
- * только для функциональных компонентов.
- */
-const Title = memo((props) => {
-    const color = useRandomColor();
-
-    return <h1 style = {{ color }}>Счётчик: {props.count}</h1>;
+    return <button onClick = { props.handleClick }>{props.children}</button>;
 });
 
-const Parent = () => {
+const Counter = () => {
     const [ count, setCount ] = useState(0);
-    const stopwatch = useStopwatch();
 
-    const buttonText = stopwatch.isRunning ? '🏁 Стоп' : '🎬 Старт';
+    const decrement = useCallback(
+        () => setCount((prevCount) => prevCount - 1),
+        [],
+    );
+    const reset = useCallback(() => setCount(0), []);
+    const increment = useCallback(
+        () => setCount((prevCount) => prevCount + 1),
+        [],
+    );
+
+    console.log('→ 🖥 Рендер родителя');
 
     return (
-        <>
-            <section className = 'counter'>
-                <Title count = { count } />
-                <button onClick = { () => setCount(count - 1) }>-</button>
-                <button onClick = { () => setCount(0) }>Обнулить</button>
-                <button onClick = { () => setCount(count + 1) }>+</button>
-            </section>
-            <section className = 'stopwatch'>
-                <code>{stopwatch.lapse} мс</code>
-                <button onClick = { stopwatch.toggleRun }>{buttonText}</button>
-                <button onClick = { stopwatch.clear }>Очистить</button>
-            </section>
-        </>
+        <section className = 'counter'>
+            <h1>Счётчик: {count}</h1>
+            <Button handleClick = { decrement }>-</Button>
+            <Button handleClick = { reset }>Обнулить</Button>
+            <Button handleClick = { increment }>+</Button>
+        </section>
     );
 };
 
-render(<Parent />, document.getElementById('app'));
+render(<Counter />, document.getElementById('app'));

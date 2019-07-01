@@ -1,9 +1,6 @@
 /**
- * Если второй аргумент useEffect — пустой массив,
- * то коллбек useEffect выполнится один раз при первом рендере компонента,
- * а функция-очиститель выполнится один раз при удалении компонента из DOM.
- *
- * Это похоже на связку componentDidMount + componentWillUnmount.
+ * Пример использования не пустого массива
+ * в качестве второго аргумента useEffect.
  */
 import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
@@ -32,10 +29,12 @@ const Counter = () => {
 const Parent = () => {
     const [ isMounted, setIsMounted ] = useState(true);
 
+    const buttonText = isMounted ? 'Спрятать' : 'Показать';
+
     return (
         <section className = 'counter'>
             <button onClick = { () => setIsMounted(!isMounted) }>
-                {isMounted ? 'Спрятать' : 'Показать'}
+                {buttonText}
             </button>
             {isMounted && <Counter />}
         </section>

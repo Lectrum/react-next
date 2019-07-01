@@ -1,0 +1,9 @@
+---
+ignoreFiles:
+- node_modules/
+- build/
+- build/
+- coverage/
+
+rules:
+    indentation: 4
