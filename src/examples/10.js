@@ -1,32 +1,50 @@
-// Core
-import React, { useState, useRef, useEffect } from 'react';
+/**
+ * Если второй аргумент useEffect — пустой массив,
+ * то коллбек useEffect выполнится один раз при первом рендере компонента,
+ * а функция-очиститель выполнится один раз при удалении компонента из DOM.
+ *
+ * Это похоже на связку componentDidMount + componentWillUnmount.
+ */
+import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
 
 const Counter = () => {
-    const [ name, setName ] = useState('🎅🏼 Дед Мороз');
-    const [ isEditing, setIsEditing ] = useState(false);
-    const nameInputRef = useRef(null);
+    const [ count, setCount ] = useState(0);
 
     useEffect(() => {
-        nameInputRef.current.focus();
-    }, [ isEditing ]);
+        console.log('✅ Первый рендер компонента.');
 
-    const buttonText = isEditing ? 'Заблокировать' : 'Разблокировать';
+        return () => console.log('❌ Удаление компонента.');
+    }, []);
+
+    console.log('🖥 Рендер!');
 
     return (
-        <section className = 'counter'>
-            <h1>{name}</h1>
-            <input
-                disabled = { !isEditing }
-                ref = { nameInputRef }
-                value = { name }
-                onChange = { (event) => setName(event.target.value) }
-            />
-            <button onClick = { () => setIsEditing(!isEditing) }>
-                {buttonText}
-            </button>
+        <section>
+            <h1>Счётчик: {count}</h1>
+            <button onClick = { () => setCount(count - 1) }>-</button>
+            <button onClick = { () => setCount(0) }>Обнулить</button>
+            <button onClick = { () => setCount(count + 1) }>+</button>
         </section>
     );
 };
 
-render(<Counter />, document.getElementById('app'));
+const Parent = () => {
+    const [ isMounted, setIsMounted ] = useState(true);
+
+    return (
+        <section className = 'counter'>
+            <button onClick = { () => setIsMounted(!isMounted) }>
+                {isMounted ? 'Спрятать' : 'Показать'}
+            </button>
+            {isMounted && (
+                <Counter
+                    isMounted = { isMounted }
+                    setIsMounted = { setIsMounted }
+                />
+            )}
+        </section>
+    );
+};
+
+render(<Parent />, document.getElementById('app'));

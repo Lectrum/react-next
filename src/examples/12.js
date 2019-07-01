@@ -1,42 +1,35 @@
-// Core
+/**
+ * Реф с помощью хуков можно зарегистрировать с помощью хука useRef.
+ * Механизм работы — такой-же, как и у классовых компонентов.
+ */
 import React, { useState, useRef, useEffect } from 'react';
 import { render } from 'react-dom';
 
-const Stopwatch = () => {
-    const [ lapse, setLapse ] = useState(0);
-    const [ isRunning, setRunning ] = useState(false);
-    const intervalRef = useRef(null);
+const Counter = () => {
+    const [ name, setName ] = useState('🎅🏼 Дед Мороз');
+    const [ isEditing, setIsEditing ] = useState(false);
+    const nameInputRef = useRef(null);
 
-    const toggleRun = () => {
-        if (isRunning) {
-            clearInterval(intervalRef.current);
-        } else {
-            const startTime = Date.now() - lapse;
-            intervalRef.current = setInterval(() => {
-                setLapse(Date.now() - startTime);
-            }, 0);
-        }
+    useEffect(() => {
+        nameInputRef.current.focus();
+    }, [ isEditing ]);
 
-        setRunning(!isRunning);
-    };
-
-    const clear = () => {
-        clearInterval(intervalRef.current);
-        setLapse(0);
-        setRunning(false);
-    };
-
-    useEffect(() => () => clearInterval(intervalRef.current), []);
-
-    const buttonText = isRunning ? '🏁 Стоп' : '🎬 Старт';
+    const buttonText = isEditing ? 'Заблокировать' : 'Разблокировать';
 
     return (
-        <section className = 'stopwatch'>
-            <code>{lapse} мс</code>
-            <button onClick = { toggleRun }>{buttonText}</button>
-            <button onClick = { clear }>Очистить</button>
+        <section className = 'counter'>
+            <h1>{name}</h1>
+            <input
+                disabled = { !isEditing }
+                ref = { nameInputRef }
+                value = { name }
+                onChange = { (event) => setName(event.target.value) }
+            />
+            <button onClick = { () => setIsEditing(!isEditing) }>
+                {buttonText}
+            </button>
         </section>
     );
 };
 
-render(<Stopwatch />, document.getElementById('app'));
+render(<Counter />, document.getElementById('app'));

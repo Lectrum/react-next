@@ -1,41 +1,23 @@
-// Core
-import React, { memo, useState } from 'react';
+/**
+ * Более сложную логику, или логику, которую можно использовать повторно нужно выносить в абстракцию — кастомный хук.
+ */
+import React from 'react';
 import { render } from 'react-dom';
 
 // Hooks
-import { useStopwatch, useRandomColor } from './hooks';
+import { useCounter } from './hooks';
 
-/**
- * memo — это аналог shouldComponentUpdate,
- * только для функциональных компонентов.
- */
-const Title = memo((props) => {
-    const color = useRandomColor();
-
-    return <h1 style = {{ color }}>Счётчик: {props.count}</h1>;
-});
-
-const Parent = () => {
-    const [ count, setCount ] = useState(0);
-    const stopwatch = useStopwatch();
-
-    const buttonText = stopwatch.isRunning ? '🏁 Стоп' : '🎬 Старт';
+const Counter = () => {
+    const counter = useCounter(5, 2);
 
     return (
-        <>
-            <section className = 'counter'>
-                <Title count = { count } />
-                <button onClick = { () => setCount(count - 1) }>-</button>
-                <button onClick = { () => setCount(0) }>Обнулить</button>
-                <button onClick = { () => setCount(count + 1) }>+</button>
-            </section>
-            <section className = 'stopwatch'>
-                <code>{stopwatch.lapse} мс</code>
-                <button onClick = { stopwatch.toggleRun }>{buttonText}</button>
-                <button onClick = { stopwatch.clear }>Очистить</button>
-            </section>
-        </>
+        <section className = 'counter'>
+            <h1>Счётчик: {counter.count}</h1>
+            <button onClick = { counter.decrement }>-</button>
+            <button onClick = { counter.reset }>Обнулить</button>
+            <button onClick = { counter.increment }>+</button>
+        </section>
     );
 };
 
-render(<Parent />, document.getElementById('app'));
+render(<Counter />, document.getElementById('app'));
