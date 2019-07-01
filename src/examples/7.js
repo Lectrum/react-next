@@ -28,13 +28,13 @@ const Counter = () => {
         console.log('⏳ useEffect');
 
         return () => {
-            console.log('⌛️ очистка!');
+            console.log('⌛️ Очистка!');
 
             clearTimeout(timer);
         };
     });
 
-    console.log('🖥 рендер!');
+    console.log('🖥 Рендер!');
 
     return (
         <section className = 'counter'>

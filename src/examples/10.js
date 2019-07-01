@@ -17,7 +17,7 @@ const Counter = () => {
         return () => console.log('❌ Удаление компонента.');
     }, []);
 
-    console.log('🖥 Рендер!');
+    console.log('🖥 Рендер!', count);
 
     return (
         <section>
@@ -37,12 +37,7 @@ const Parent = () => {
             <button onClick = { () => setIsMounted(!isMounted) }>
                 {isMounted ? 'Спрятать' : 'Показать'}
             </button>
-            {isMounted && (
-                <Counter
-                    isMounted = { isMounted }
-                    setIsMounted = { setIsMounted }
-                />
-            )}
+            {isMounted && <Counter />}
         </section>
     );
 };

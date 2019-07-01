@@ -1,10 +1,12 @@
+/**
+ * Под капотом у React.
+ */
 import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
 
 const getInitialState = () => Number(localStorage.getItem('count')) || 0;
 
 const Counter = () => {
-    /* ↓ под капотом у React ↓ */
     const [ count1, setCount1 ] = useState(getInitialState); /* (1) состояние: регистрация ячейки памяти [1] */
     const [ count2, setCount2 ] = useState(0);               /* (2) состояние: регистрация ячейки памяти [1, 2] */
 

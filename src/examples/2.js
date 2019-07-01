@@ -14,7 +14,7 @@ import { render } from 'react-dom';
 const Counter = () => {
     const [ count, setCount ] = useState(0);
 
-    console.log('🖥 рендер!', count);
+    console.log('🖥 Рендер!', count);
 
     return (
         <section className = 'counter'>

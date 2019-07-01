@@ -7,7 +7,7 @@
  * - при удалении анмаунтинге компонента.
  *
  * О useEffect такой формы можно думать,
- * как о componentDidMount + componentDidUpdate.
+ * как о componentDidMount + componentDidUpdate + componentWillUnmount.
  */
 import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
@@ -19,7 +19,7 @@ const Counter = () => {
     const [ count2, setCount2 ] = useState(0);
 
     useEffect(() => {
-        console.log('📦 Запись в localStorage');
+        console.log('📦 Запись в localStorage', count1);
         localStorage.setItem('count', count1);
     }, [ count1 ]);
 

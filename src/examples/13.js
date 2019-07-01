@@ -16,7 +16,7 @@ const Child = forwardRef((props, ref) => {
 
     useImperativeHandle(ref, () => {
         return {
-            focusImperatively: () => {
+            focusImperatively() {
                 nameInputRef.current.focus();
             },
         };
